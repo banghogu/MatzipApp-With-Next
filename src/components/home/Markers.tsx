@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { StoreType } from "@/models/store";
 import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react";
 
@@ -12,8 +11,8 @@ const Markers = ({ map, storeDatas, setCurrentStore }: MarkersProps) => {
   const loadKakoMarker = useCallback(() => {
     if (map) {
       storeDatas?.map((store) => {
-        var imageSrc = store?.bizcnd_code_nm
-            ? `/images/markers/${store?.bizcnd_code_nm}.png`
+        var imageSrc = store?.category
+            ? `/images/markers/${store?.category}.png`
             : "/images/markers/default.png",
           imageSize = new window.kakao.maps.Size(40, 40),
           imageOption = { offset: new window.kakao.maps.Point(27, 69) };
@@ -24,8 +23,8 @@ const Markers = ({ map, storeDatas, setCurrentStore }: MarkersProps) => {
           imageOption
         );
         var markerPosition = new window.kakao.maps.LatLng(
-          store?.y_dnts,
-          store?.x_cnts
+          store?.lat,
+          store?.lng
         );
         var marker = new window.kakao.maps.Marker({
           position: markerPosition,
@@ -33,7 +32,7 @@ const Markers = ({ map, storeDatas, setCurrentStore }: MarkersProps) => {
         });
         marker.setMap(map);
 
-        var content = `<div class="infowindow">${store?.upso_nm}</div>`;
+        var content = `<div class="infowindow">${store?.name}</div>`;
         var customOverlay = new window.kakao.maps.CustomOverlay({
           position: markerPosition,
           content: content,
