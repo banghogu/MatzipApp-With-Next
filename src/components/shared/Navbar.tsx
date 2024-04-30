@@ -1,11 +1,13 @@
-import { useState } from 'react'
-import Link from 'next/link'
+import { useState } from "react";
+import Link from "next/link";
 
-import { BiMenu } from 'react-icons/bi'
-import { AiOutlineClose } from 'react-icons/ai'
+import { BiMenu } from "react-icons/bi";
+import { AiOutlineClose } from "react-icons/ai";
+import { signOut, useSession } from "next-auth/react";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const { data, status } = useSession();
 
   return (
     <>
@@ -26,7 +28,8 @@ export default function Navbar() {
           <Link href="/users/mypage" className="navbar__list--item">
             마이페이지
           </Link>
-          {/* {status === 'authenticated' ? (
+
+          {status === "authenticated" ? (
             <button type="button" onClick={() => signOut()}>
               로그아웃
             </button>
@@ -34,7 +37,7 @@ export default function Navbar() {
             <Link href="/api/auth/signin" className="navbar__list--item">
               로그인
             </Link>
-          )} */}
+          )}
         </div>
         {/* mobile button */}
         <div
@@ -77,12 +80,12 @@ export default function Navbar() {
             >
               마이페이지
             </Link>
-            {/* {status === 'authenticated' ? (
+            {status === "authenticated" ? (
               <button
                 type="button"
                 onClick={() => {
-                  signOut()
-                  setIsOpen(false)
+                  signOut();
+                  setIsOpen(false);
                 }}
                 className="navbar__list--item--mobile text-left"
               >
@@ -96,10 +99,10 @@ export default function Navbar() {
               >
                 로그인
               </Link>
-            )} */}
+            )}
           </div>
         </div>
       )}
     </>
-  )
+  );
 }
