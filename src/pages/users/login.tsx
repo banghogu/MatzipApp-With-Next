@@ -10,8 +10,6 @@ export default function LoginPage() {
   const { status, data: session } = useSession();
   const router = useRouter();
 
-  console.log(session);
-
   useEffect(() => {
     if (status === "authenticated") {
       router.replace("/");
@@ -19,7 +17,7 @@ export default function LoginPage() {
   }, [router, status]);
 
   return (
-    <div className="flex flex-col justify-center px-6 lg:px-8 h-[60vh] mt-32">
+    <div className="flex flex-col justify-center px-6 lg:px-8 h-[60vh] mt-28">
       <div className="mx-auto w-full max-w-sm">
         <div className="text-blue-800 text-center text-2xl font-semibold italic">
           Nextmap
@@ -33,14 +31,6 @@ export default function LoginPage() {
       </div>
       <div className="mt-10 mx-auto w-full max-w-sm">
         <div className="flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={() => signIn("google", { callbackUrl: "/" })}
-            className="text-white flex gap-2 bg-[#4285F4] hover:bg-[#4285F4]/90 font-medium rounded-lg w-full px-5 py-4 text-center items-center justify-center"
-          >
-            <AiOutlineGoogle className="w-6 h-6" />
-            구글로 로그인
-          </button>
           <button
             type="button"
             onClick={() => signIn("naver", { callbackUrl: "/" })}

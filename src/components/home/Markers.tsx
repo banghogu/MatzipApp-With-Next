@@ -1,13 +1,15 @@
+import { currentStoreState, mapState } from "@/atom";
 import { StoreType } from "@/models/store";
-import React, { Dispatch, SetStateAction, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 interface MarkersProps {
-  map: any;
   storeDatas: StoreType[];
-  setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 
-const Markers = ({ map, storeDatas, setCurrentStore }: MarkersProps) => {
+const Markers = ({ storeDatas }: MarkersProps) => {
+  const map = useRecoilValue(mapState);
+  const setCurrentStore = useSetRecoilState(currentStoreState);
   const loadKakoMarker = useCallback(() => {
     if (map) {
       storeDatas?.map((store) => {

@@ -8,6 +8,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 const prisma = new PrismaClient();
 
 export const authOptions = {
+  session: {
+    strategy: "jwt" as const,
+    maxAge: 60 * 60 * 24,
+    updateAge: 60 * 60 * 2,
+  },
   adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [
@@ -15,14 +20,6 @@ export const authOptions = {
     NaverProvider({
       clientId: process.env.NAVER_CLIENT_ID || "",
       clientSecret: process.env.NAVER_CLIENT_SECRET || "",
-    }),
-    KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID || "",
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID || "",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
   pages: {

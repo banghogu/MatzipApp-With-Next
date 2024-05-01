@@ -1,12 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { StoreApiResponse } from "@/models/store";
+import { StoreApiResponse, StoreType } from "@/models/store";
 import { PrismaClient } from "@prisma/client";
+
+interface Responsetype {
+  page?: string;
+  limit?: string;
+  q?: string;
+  district?: string;
+}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<StoreApiResponse>
+  res: NextApiResponse<StoreApiResponse | StoreType | StoreType[]>
 ) {
-  const { page = "" }: { page?: string } = req.query;
+  const {
+    page = "",
+    limit = "",
+    q = "",
+    district = "",
+  }: Responsetype = req.query;
   const prisma = new PrismaClient();
 
   if (page) {
@@ -14,7 +26,11 @@ export default async function handler(
     const skipPage = parseInt(page) - 1;
     const stores = await prisma.store.findMany({
       orderBy: { id: "asc" },
-      take: 10,
+      where: {
+        name: q ? { contains: q } : {},
+        address: district ? { contains: district } : {},
+      },
+      take: parseInt(limit),
       skip: skipPage * 10,
     });
 
@@ -25,10 +41,14 @@ export default async function handler(
       totalPage: Math.ceil(count / 10),
     });
   } else {
+    const { id }: { id?: string } = req.query;
     const stores = await prisma.store.findMany({
       orderBy: { id: "asc" },
+      where: {
+        id: id ? parseInt(id) : {},
+      },
     });
 
-    return res.status(200).json(stores);
+    return res.status(200).json(id ? stores[0] : stores);
   }
 }
