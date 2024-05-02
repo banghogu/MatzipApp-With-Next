@@ -1,5 +1,5 @@
 export interface locationType {
-  lat: number;
-  lng?: number;
+  lat: string | number | null;
+  lng?: string | number | null;
   zoom?: number;
 }

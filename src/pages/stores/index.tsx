@@ -6,22 +6,23 @@ import useDebounce from "@/hooks/useDebounce";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 import { StoreType } from "@/models/store";
 import { fetchStores } from "@/remote/store";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { BiError } from "react-icons/bi";
+import { useRecoilValue } from "recoil";
+import { searchState } from "@/atom";
 
 const StoreListPage = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref, {});
   const isPageEnd = !!pageRef?.isIntersecting;
 
-  const [q, setQ] = useState<string | null>(null);
-  const [district, setDistrict] = useState<string | null>(null);
-  const debouncedKeyword = useDebounce(q);
+  const searchValue = useRecoilValue(searchState);
+  const debouncedKeyword = useDebounce(searchValue?.q);
 
   const searchParams = {
     q: debouncedKeyword,
-    district: district,
+    district: searchValue?.district,
   };
 
   const {
@@ -72,7 +73,7 @@ const StoreListPage = () => {
 
   return (
     <div className="px-4 md:max-w-4xl mx-auto py-10 mt-2">
-      <SearchFilter setQ={setQ} setDistrict={setDistrict} />
+      <SearchFilter />
       {debouncedKeyword != "" && stores?.length == 0 && (
         <div className="flex justify-center items-center font-bold mt-44">
           <BiError className="text-xl" />

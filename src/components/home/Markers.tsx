@@ -1,7 +1,8 @@
-import { currentStoreState, mapState } from "@/atom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { currentStoreState, locationState, mapState } from "@/atom";
 import { StoreType } from "@/models/store";
 import React, { useCallback, useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 interface MarkersProps {
   storeDatas: StoreType[];
@@ -10,6 +11,8 @@ interface MarkersProps {
 const Markers = ({ storeDatas }: MarkersProps) => {
   const map = useRecoilValue(mapState);
   const setCurrentStore = useSetRecoilState(currentStoreState);
+  const [location, setLocation] = useRecoilState(locationState);
+
   const loadKakoMarker = useCallback(() => {
     if (map) {
       storeDatas?.map((store) => {
@@ -52,6 +55,11 @@ const Markers = ({ storeDatas }: MarkersProps) => {
 
         window.kakao.maps.event.addListener(marker, "click", function () {
           setCurrentStore(store);
+          setLocation({
+            ...location,
+            lat: store.lat,
+            lng: store.lng,
+          });
         });
       });
     }

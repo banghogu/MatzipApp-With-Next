@@ -1,4 +1,5 @@
 import { locationType } from "@/models/location";
+import { SearchType } from "@/models/search";
 import { StoreType } from "@/models/store";
 import { atom } from "recoil";
 
@@ -24,4 +25,9 @@ export const locationState = atom<locationType>({
     lng: DEFAULT_LNG,
     zoom: DEFAULT_ZOOM,
   },
+});
+
+export const searchState = atom<SearchType | null>({
+  key: "search",
+  default: null,
 });
