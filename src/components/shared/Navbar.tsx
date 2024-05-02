@@ -22,9 +22,6 @@ export default function Navbar() {
           <Link href="/stores/new" className="navbar__list--item">
             맛집 등록
           </Link>
-          <Link href="/users/likes" className="navbar__list--item">
-            찜한 가게
-          </Link>
           <Link href="/users/mypage" className="navbar__list--item">
             마이페이지
           </Link>
@@ -65,13 +62,6 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             >
               맛집 등록
-            </Link>
-            <Link
-              href="/users/likes"
-              className="navbar__list--item--mobile"
-              onClick={() => setIsOpen(false)}
-            >
-              찜한 가게
             </Link>
             <Link
               href="/users/mypage"
