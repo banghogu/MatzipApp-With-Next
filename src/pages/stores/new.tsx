@@ -1,5 +1,11 @@
-const StoreNewPage = () => {
-  return <div>StoreNewPage</div>
-}
+import NewStoreForm from "@/components/newStore/NewStoreForm";
 
-export default StoreNewPage
+const StoreNewPage = () => {
+  return (
+    <div>
+      <NewStoreForm />
+    </div>
+  );
+};
+
+export default StoreNewPage;
