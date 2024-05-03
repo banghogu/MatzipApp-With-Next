@@ -1,3 +1,4 @@
+import Comments from "@/components/comments";
 import Map from "@/components/home/Map";
 import Loader from "@/components/shared/Loader";
 import Marker from "@/components/store/Marker";
@@ -131,10 +132,13 @@ const StoreDetailPage = () => {
         </div>
       </div>
       {isSuccess && (
-        <div className="overflow-hidden w-full mb-20 max-w-5xl mx-auto max-h-[600px]">
-          <Map lat={store?.lat} lng={store?.lng} zoom={1} />
-          <Marker store={store} />
-        </div>
+        <>
+          <div className="overflow-hidden w-full mb-20 max-w-3xl mx-auto max-h-[450px]">
+            <Map lat={store?.lat} lng={store?.lng} zoom={1} />
+            <Marker store={store} />
+          </div>
+          <Comments storeId={store.id} />
+        </>
       )}
     </>
   );
