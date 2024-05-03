@@ -1,3 +1,4 @@
+import CurrentLocationButton from "@/components/home/CurrentLocation";
 import Map from "@/components/home/Map";
 import Markers from "@/components/home/Markers";
 import StoreBox from "@/components/home/StoreBox";
@@ -10,6 +11,7 @@ export default function Home({ stores }: { stores: StoreType[] }) {
       <Map />
       <Markers storeDatas={stores} />
       <StoreBox />
+      <CurrentLocationButton />
     </div>
   );
 }
