@@ -4,7 +4,13 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
-const CommentList = ({ comments }: { comments: CommentApiResponse }) => {
+const CommentList = ({
+  comments,
+  displayStore,
+}: {
+  comments: CommentApiResponse;
+  displayStore?: boolean;
+}) => {
   const { data: session } = useSession();
 
   const handleDeleteComment = async (id: number) => {
@@ -45,16 +51,16 @@ const CommentList = ({ comments }: { comments: CommentApiResponse }) => {
                 {new Date(comment?.createdAt)?.toLocaleDateString()}
               </div>
               <div className="text-black mt-1 text-base">{comment.body}</div>
-              {/* {displayStore && comment.store && (
+              {displayStore && comment.store && (
                 <div className="mt-2">
                   <Link
                     href={`/stores/${comment.store.id}`}
-                    className="text-gray-500 hover:text-gray-400 text-xs underline font-medium"
+                    className="text-blue-400 hover:text-blue-300 text-xs underline font-medium"
                   >
                     {comment.store.name}
                   </Link>
                 </div>
-              )} */}
+              )}
             </div>
             <div>
               {comment.userId == session?.user.id && (
@@ -71,7 +77,7 @@ const CommentList = ({ comments }: { comments: CommentApiResponse }) => {
         ))
       ) : (
         <div className="p-4 border border-gray-200 rounded-md text-sm text-gray-400">
-          댓글이 없습니다.
+          아직 리뷰가 없네요.
         </div>
       )}
     </div>

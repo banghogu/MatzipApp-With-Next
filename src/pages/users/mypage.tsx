@@ -1,3 +1,4 @@
+import MyComments from "@/components/mypage/MyComments";
 import { signOut, useSession } from "next-auth/react";
 import React from "react";
 
@@ -61,6 +62,7 @@ const MyPage = () => {
           </div>
         </dl>
       </div>
+      <MyComments />
     </div>
   );
 };

@@ -23,7 +23,7 @@ const CommentForm = ({
     });
 
     if (result.status === 200) {
-      alert("댓글을 등록했습니다.");
+      alert("리뷰를 등록했습니다.");
       resetField("body");
       refetch?.();
     } else {
@@ -41,7 +41,7 @@ const CommentForm = ({
       )}
       <textarea
         rows={3}
-        placeholder="댓글을 작성해주세요..."
+        placeholder="리뷰를 작성해주세요..."
         {...register("body", { required: true })}
         className="block w-full min-h-[120px] resize-none border rounded-md bg-transparent py-2.5 px-4 text-black placeholder:text-gray-400 text-sm leading-6"
       />
@@ -49,7 +49,7 @@ const CommentForm = ({
         type="submit"
         className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 text-sm font-semibold shadow-sm mt-2 rounded-md"
       >
-        작성하기
+        리뷰 작성하기
       </button>
     </form>
   );

@@ -27,12 +27,6 @@ const Comments = ({ storeId }: { storeId: number }) => {
       )}
       {/* comment list */}
       <CommentList comments={comments} />
-      {/* pagination */}
-      {/* <Pagination
-        total={comments?.totalPage}
-        page={page}
-        pathname={`/stores/${storeId}`}
-      /> */}
     </div>
   );
 };

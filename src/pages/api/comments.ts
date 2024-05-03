@@ -63,7 +63,7 @@ export default async function handler(
     const count = await prisma.comment.count({
       where: {
         storeId: storeId ? parseInt(storeId) : {},
-        userId: user ? session?.user.id : {},
+        userId: user ? Number(session?.user.id) : {},
       },
     });
     // @ts-ignore
@@ -71,7 +71,7 @@ export default async function handler(
       orderBy: { createdAt: "desc" },
       where: {
         storeId: storeId ? parseInt(storeId) : {},
-        userId: user ? session?.user.id : {},
+        userId: user ? Number(session?.user.id) : {},
       },
       skip: skipPage * parseInt(limit),
       take: parseInt(limit),
