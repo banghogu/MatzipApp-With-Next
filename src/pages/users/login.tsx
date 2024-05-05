@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-import { AiOutlineGoogle } from "react-icons/ai";
 import { SiNaver } from "react-icons/si";
 
 import { signIn, useSession } from "next-auth/react";
@@ -18,18 +17,18 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col justify-center px-6 lg:px-8 h-[60vh] mt-28">
-      <div className="mx-auto w-full max-w-sm">
-        <div className="text-blue-800 text-center text-2xl font-semibold italic">
+      <div className="w-full max-w-sm mx-auto">
+        <div className="text-2xl italic font-semibold text-center text-blue-800">
           Nextmap
         </div>
-        <div className="text-center mt-6 text-2xl font-bold text-gray-600">
+        <div className="mt-6 text-2xl font-bold text-center text-gray-600">
           SNS 계정으로 로그인해주세요
         </div>
-        <p className="mt-2 text-center text-sm text-gray-600">
+        <p className="mt-2 text-sm text-center text-gray-600">
           계정이 없다면 자동으로 회원가입이 진행됩니다.
         </p>
       </div>
-      <div className="mt-10 mx-auto w-full max-w-sm">
+      <div className="w-full max-w-sm mx-auto mt-10">
         <div className="flex flex-col gap-3">
           <button
             type="button"

@@ -72,10 +72,10 @@ const StoreListPage = () => {
   }
 
   return (
-    <div className="px-4 md:max-w-4xl mx-auto py-10 mt-2">
+    <div className="px-4 py-10 mx-auto mt-2 md:max-w-4xl">
       <SearchFilter />
       {debouncedKeyword != "" && stores?.length == 0 && (
-        <div className="flex justify-center items-center font-bold mt-44">
+        <div className="flex items-center justify-center font-bold mt-44">
           <BiError className="text-xl" />
           검색결과가 존재하지 않습니다
         </div>
@@ -85,7 +85,7 @@ const StoreListPage = () => {
         {stores?.map((store, i) => <StoreList key={i} store={store} />)}
       </ul>
       {(isFetching || isFetchingNextPage || hasNextPage) && <Loader />}
-      <div className="w-full touch-none h-10 mb-10" ref={ref} />
+      <div className="w-full h-10 mb-10 touch-none" ref={ref} />
     </div>
   );
 };
